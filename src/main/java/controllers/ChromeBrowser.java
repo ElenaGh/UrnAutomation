@@ -1,12 +1,10 @@
 package controllers;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import pages.Page;
 import repository.Constants;
 
 public class ChromeBrowser implements WebBrowser {
@@ -34,20 +32,21 @@ public class ChromeBrowser implements WebBrowser {
 	}
 
 	@Override
-	public Page openPage(Page page) {
+	public void openPage(String page) {
 		if (driver == null) {
 			LOG.severe("startBrowser(url) method needs to be called before calling closeBrowser()!");
 			System.exit(-1);
 		} else {
-			driver.get(page.getUrl());
+			LOG.info("Navigating to: " + page);
+			driver.get(page);
 		}
-		return page;
 	}
 
 	@Override
 	public WebDriver startBrowser() {
 		LOG.info("Starting Chrome browser!");
 		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
 	}
 

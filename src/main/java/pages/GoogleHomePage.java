@@ -4,28 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class GoogleHomePage extends Page {
+public class GoogleHomePage {
 
-	public String getUrl() {
-		return super.getUrl();
+	private static String pageUrl = "https://www.google.com";
+
+	public static String getUrl() {
+		return pageUrl;
 	}
 
-	public void setUrl(String url) {
-		super.setUrl(url);;
-	}
-
-	public GoogleHomePage(String url) {
-		this.setUrl(url);
-	}
-
-	public WebElement getSearchBox(WebDriver browser) {
+	public static WebElement getSearchBox(WebDriver browser) {
 		return browser.findElement(By.id("lst-ib"));
-	}
-	
-	public void searchFor(WebDriver browser, String searchString) {
-		WebElement searchBox = browser.findElement(By.id("lst-ib")); 
-		searchBox.sendKeys(searchString);
-		searchBox.submit();
 	}
 
 }
